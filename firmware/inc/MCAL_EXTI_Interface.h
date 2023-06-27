@@ -9,10 +9,35 @@
 #ifndef MCAL_EXTI_INTERFACE_H_
 #define MCAL_EXTI_INTERFACE_H_
 
+/**
+ * @headerfile "BIT_MATH.h"
+ * @brief This header file contains the Bit Math operations.
+ */
 #include "BIT_MATH.h"
+
+/**
+ * @headerfile "STD_TYPES.h"
+ * @brief This header file contains the standard data types.
+ */
+
 #include "STD_TYPES.h"
+
+/**
+ * @headerfile "MCAL_GPIO_Interface.h"
+ * @brief This header file contains the interface for the GPIO peripheral.
+ */
 #include "MCAL_GPIO_Interface.h"
+
+/**
+ * @headerfile "MCAL_EXTI_Private.h"
+ * @brief This header file contains the private implementation of the EXTI peripheral.
+ */
 #include "MCAL_EXTI_Private.h"
+
+/**
+ * @headerfile "CORE_NVIC_Interface.h"
+ * @brief This header file contains the interface for the NVIC peripheral.
+ */
 #include "CORE_NVIC_Interface.h"
 
 /**
