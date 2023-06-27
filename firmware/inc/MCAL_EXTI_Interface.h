@@ -1,3 +1,11 @@
+/**
+ * @file MCAL_EXTI_Interface.h
+ * @brief This file contains the interface for the EXTI peripheral.
+ *
+ * @author Ahmed Abu Raya
+ * @date 2023-06-20
+ */
+
 #ifndef MCAL_EXTI_INTERFACE_H_
 #define MCAL_EXTI_INTERFACE_H_
 
@@ -7,6 +15,10 @@
 #include "MCAL_EXTI_Private.h"
 #include "CORE_NVIC_Interface.h"
 
+/**
+ * @enum EXTI_Line_t
+ * @brief This enumeration defines the EXTI lines.
+ */
 typedef enum {
 	EXTI0,
 	EXTI1,
@@ -26,6 +38,10 @@ typedef enum {
 	EXTI15,
 } EXTI_Line_t;
 
+/**
+ * @enum EXTIRQ_Src_t
+ * @brief This enumeration defines the EXTIRQ sources.
+ */
 typedef enum {
 	EXTIRQ0_A0,
 	EXTIRQ1_A1,
@@ -69,62 +85,141 @@ typedef enum {
 
 } EXTIRQ_Src_t;
 
+/**
+ * @enum EXTI_Sense_t
+ * @brief This enumeration defines the EXTI edge trigger types.
+ */
 typedef enum {
 	EXTI_LOW_LEVEL = 0,
 	EXTI_ON_CHANGE = 1,
 	EXTI_FALLING_EDGE = 2,
 	EXTI_RISING_EDGE = 3,
-
 } EXTI_Sense_t;
 
+/**
+ * @struct EXTI_GPIO_Mapping_t
+ * @brief This structure defines the EXTI pin configuration.
+ */
 typedef struct {
-	EXTI_Line_t EXTI_LineNum;    //select EXTI input line number
-	//this parameter can be a value of  @ref EXTI_LineNumber
+	/**
+	 * @brief This field selects the EXTI input line number.
+	 *
+	 * This parameter can be a value of  @ref EXTI_LineNumber
+	 */
+	EXTI_Line_t EXTI_LineNum;
 
-	GPIO_TypeDef *GPIO_Port;        //select GPIO port to be used as EXTI port
-	//this parameter can be a peripheral instant @ MCU DEVICE HEADER
+	/**
+	 * @brief This field selects the GPIO port to be used as EXTI port.
+	 *
+	 * This parameter can be a peripheral instant @ MCU DEVICE HEADER
+	 */
+	GPIO_TypeDef *GPIO_Port;
 
-	GPIO_Pin_t GPIO_Pin;            //select GPIO pin to be used as EXTI pin
-	//this parameter can be a value of  @ref GPIO_Pins_define @ MCU GPIO Driver
+	/**
+	 * @brief This field selects the GPIO pin to be used as EXTI pin.
+	 *
+	 * This parameter can be a value of  @ref GPIO_Pins_define @ MCU GPIO Driver
+	 */
+	GPIO_Pin_t GPIO_Pin;
 
-	IRQ_Num_t IVT_IRQNumber;            //select Interrupt Vector Table request number
-	//this parameter can be a value of @ref IVT_IRQNumber @ MCU DEVICE HEADER
-
+	/**
+	 * @brief This field selects the Interrupt Vector Table request number.
+	 *
+	 * This parameter can be a value of @ref IVT_IRQNumber @ MCU DEVICE HEADER
+	 */
+	IRQ_Num_t IVT_IRQNumber;
 } EXTI_GPIO_Mapping_t;
 
+/**
+ * @brief This global variable defines the EXTI GPIO mapping array.
+ */
 extern EXTI_GPIO_Mapping_t EXTI_Mapping[];
 
+/**
+ * @brief This structure defines the EXTI pin configuration.
+ *
+ * @details This structure contains the following fields:
+ *
+ *   * EXTI_PinMap: This field selects the EXTI input pin.
+ *   * EXTI_Priority: This field selects the IRQ Priority group and subgroup.
+ *   * Trigger_State: This field selects the trigger state (edge trigger).
+ *   * IRQ_EN: This field selects the pending request register state.
+ *   * IRQ_pCallBack: This field is a pointer to the IRQ callback function.
+ */
 typedef struct {
-	EXTI_GPIO_Mapping_t EXTI_PinMap;    //select EXTI input pin
-	//this parameter can be a value of   @ref EXTI_define
+	/**
+	 * @brief This field selects the EXTI input pin.
+	 *
+	 * This parameter can be a value of  @ref EXTI_define
+	 */
+	EXTI_GPIO_Mapping_t EXTI_PinMap;
 
-	NVIC_CfgType EXTI_Priority;        //select IRQ Priority group and subgroup
+	/**
+	 * @brief This field selects the IRQ Priority group and subgroup.
+	 */
+	NVIC_CfgType EXTI_Priority;
 
-	EXTI_Sense_t Trigger_State;        //select trigger state (edge trigger)
-	//this parameter can be a value of
+	/**
+	 * @brief This field selects the trigger state (edge trigger).
+	 *
+	 * This parameter can be a value of
+	 */
+	EXTI_Sense_t Trigger_State;
 
-	bool IRQ_EN;            //select pending request register state
-	//this parameter can be a value of  @ref EXTI_IRQ_EN_define (INT_MASK + NVIC Enable/Disable)
+	/**
+	 * @brief This field selects the pending request register state.
+	 *
+	 * This parameter can be a value of  @ref EXTI_IRQ_EN_define (INT_MASK + NVIC Enable/Disable)
+	 */
+	bool IRQ_EN;
 
-	void (*IRQ_pCallBack)(void);            //pointer to IRQ call back function
-
+	/**
+	 * @brief This field is a pointer to the IRQ callback function.
+	 */
+	void (*IRQ_pCallBack)(void);
 } EXTI_PinCfg_t;
 
+/**
+ * @brief This global variable defines the EXTI pin configuration array.
+ */
 extern EXTI_PinCfg_t EXTI_G_Cfg[];
 
+/**
+ * @brief This function is used to initialize the EXTI peripheral.
+ *
+ * @param [in] Cp_EXTI_Cfg Pointer to the EXTI pin configuration structure.
+ *
+ * @return None.
+ */
 void MCL_EXTI_vInit(EXTI_PinCfg_t *Cp_EXTI_Cfg);
 
+/**
+ * @brief This function is used to initialize the GPIO peripheral for EXTI.
+ *
+ * @param [in] GPIOx Pointer to the GPIO peripheral.
+ * @param [in] Cp_EXTIPin GPIO pin number.
+ *
+ * @return None.
+ */
 void MCL_EXTI_vInitGPIO(GPIO_TypeDef *GPIOx, GPIO_Pin_t Cp_EXTIPin);
 
+/**
+ * @brief This function is used to enable the EXTI interrupt.
+ *
+ * @param [in] Cp_EXTI_Cfg Pointer to the EXTI pin configuration structure.
+ * @param [in] Lc_pCallBackFn Pointer to the IRQ callback function.
+ *
+ * @return None.
+ */
 void MCL_EXTI_vEnable(EXTI_PinCfg_t *Cp_EXTI_Cfg, void (*Lc_pCallBackFn)(void));
 
+/**
+ * @brief This function is used to disable the EXTI interrupt.
+ *
+ * @param [in] Cp_xLineNo EXTI line number.
+ *
+ * @return None.
+ */
 void MCL_EXTI_vDisable(EXTI_Line_t Cp_xLineNo);
 
 #endif /* MCAL_EXTI_INTERFACE_H_ */
-
-
-
-
-
-
-
