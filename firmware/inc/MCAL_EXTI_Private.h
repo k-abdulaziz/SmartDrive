@@ -85,11 +85,13 @@ typedef struct {
 } EXTI_Reg_t;
 
 /**
+ * @def SYSCFG
  * @brief This macro is used to get the base address of the SYSCFG peripheral.
  */
 #define SYSCFG            ((SYSCFG_Reg_t *)SYSCFG_BASE)
 
 /**
+ * @def EXTI
  * @brief This macro is used to get the base address of the EXTI peripheral.
  */
 #define EXTI              ((EXTI_Reg_t *)EXTI_BASE)
