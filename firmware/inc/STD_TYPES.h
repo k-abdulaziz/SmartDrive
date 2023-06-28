@@ -119,6 +119,21 @@ typedef signed long long s64;
  */
 typedef unsigned long long u64;
 
+/**
+ * @typedef vu16
+ * @brief A 16-bit volatile unsigned integer data type.
+ *
+ * This data type can store values from 0 to 65535.
+ */
+typedef volatile u16     vu16;
+
+/**
+ * @typedef vu32
+ * @brief A 32-bit volatile unsigned integer data type.
+ *
+ * This data type can store values from 0 to 4294967295.
+ */
+typedef volatile u32     vu32;
 
 /**
  * @typedef f32
@@ -144,8 +159,7 @@ typedef double f64;
  *
  * This data type can have two values: `TRUE` and `FALSE`.
  */
-enum boolean
-{
+enum boolean {
 	FALSE,
 	TRUE,
 };
@@ -156,8 +170,7 @@ enum boolean
  *
  * This enumeration can have two values: `RESET` and `SET`.
  */
-enum STD_Status
-{
+enum STD_Status {
 	RESET,
 	SET,
 };
@@ -168,8 +181,7 @@ enum STD_Status
  *
  * This enumeration can have two values: `DISABLE_STATE` and `ENABLE_STATE`.
  */
-enum Functional_State
-{
+enum Functional_State {
 	DISABLE_STATE,
 	ENABLE_STATE,
 };
