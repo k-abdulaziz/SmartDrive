@@ -1,45 +1,251 @@
+/**
+ * @file STM32F4XX_DEVICE_HEADER_H_
+ * @brief This file contains the device headers for STM32F4XX.
+ *
+ * @author Ahmed Abu Raya
+ * @date 2023-06-20
+ */
 
 #ifndef STM32F4XX_DEVICE_HEADER_H_
 #define STM32F4XX_DEVICE_HEADER_H_
 
+/**
+ * @headerfile "STD_TYPES.h"
+ * @brief This header file contains the standard data types.
+ */
 #include "STD_TYPES.h"
+
+/**
+ * @def __IO
+ * @brief Macro used to define volatile memory access.
+ *
+ * This macro is used to define volatile memory access. It is commonly used to define volatile variables.
+ */
 
 #define __IO    volatile
 
+/**
+ * @def FLASH_MEMORY_BASE
+ * @brief Base address of the flash memory.
+ *
+ * This macro defines the base address of the flash memory.
+ */
+
 #define FLASH_MEMORY_BASE              0x08000000UL
+
+/**
+ * @def SYSTEM_MEMORY_BASE
+ * @brief Base address of the system memory.
+ *
+ * This macro defines the base address of the system memory.
+ */
+
 #define SYSTEM_MEMORY_BASE             0x1FFFF000UL
 
+/**
+ * @def SRAM_BASE
+ * @brief Base address of the SRAM.
+ *
+ * This macro defines the base address of the SRAM (Static Random Access Memory).
+ */
+
 #define SRAM_BASE                      0x20000000UL
+
+/**
+ * @def CORTEX_M4_PERIPH_BASE
+ * @brief Base address of the Cortex-M4 peripherals.
+ *
+ * This macro defines the base address of the Cortex-M4 peripherals.
+ */
+
 #define CORTEX_M4_PERIPH_BASE          0xE000E000UL
 
+/**
+ * @def PERIPH_BASE
+ * @brief Base address of the peripheral memory map.
+ *
+ * This macro defines the base address of the peripheral memory map.
+ */
+
 #define PERIPH_BASE                    0x40000000UL
-/*!< Peripheral memory map */
+
+/**
+ * @def APB1PERIPH_BASE
+ * @brief Base address of the APB1 peripherals.
+ *
+ * This macro defines the base address of the APB1 peripherals.
+ */
+
 #define APB1PERIPH_BASE                PERIPH_BASE
+
+/**
+ * @def APB2PERIPH_BASE
+ * @brief Base address of the APB2 peripherals.
+ *
+ * This macro defines the base address of the APB2 peripherals.
+ */
+
 #define APB2PERIPH_BASE                (PERIPH_BASE + 0x00010000UL)
+
+/**
+ * @def AHBPERIPH_BASE
+ * @brief Base address of the AHB peripherals.
+ *
+ * This macro defines the base address of the AHB (Advanced High-Performance Bus) peripherals.
+ */
+
 #define AHBPERIPH_BASE                 (PERIPH_BASE + 0x00020000UL)
 
-#define SYSTICK_BASE                   (CORTEX_M4_PERIPH_BASE    +  0x0010UL)
-#define NVIC_BASE                      (CORTEX_M4_PERIPH_BASE +  0x0100UL)                    /*!< NVIC Base Address */
+/**
+ * @def SYSTICK_BASE
+ * @brief Base address of the SysTick.
+ *
+ * This macro defines the base address of the SysTick peripheral.
+ */
+
+#define SYSTICK_BASE                   (CORTEX_M4_PERIPH_BASE +  0x0010UL)
+
+/**
+ * @def NVIC_BASE
+ * @brief Base address of the NVIC (Nested Vectored Interrupt Controller).
+ *
+ * This macro defines the base address of the NVIC (Nested Vectored Interrupt Controller).
+ */
+
+#define NVIC_BASE                      (CORTEX_M4_PERIPH_BASE +  0x0100UL)
+
+/**
+ * @def SCB_BASE
+ * @brief Base address of the SCB (System Control Block).
+ *
+ * This macro defines the base address of the SCB (System Control Block).
+ */
+
 #define SCB_BASE                       (CORTEX_M4_PERIPH_BASE +  0x0D00UL)
 
-/*!< APB1 peripherals */
+/**
+ * @def TIM2_BASE
+ * @brief Base address of the TIM2 peripheral.
+ *
+ * This macro defines the base address of the TIM2 (Timer 2) peripheral.
+ */
+
 #define TIM2_BASE                       (APB1PERIPH_BASE + 0x0000UL)
+
+/**
+ * @def TIM3_BASE
+ * @brief Base address of the TIM3 peripheral.
+ *
+ * This macro defines the base address of the TIM3 (Timer 3) peripheral.
+ */
+
 #define TIM3_BASE                       (APB1PERIPH_BASE + 0x0400UL)
+
+/**
+ * @def TIM4_BASE
+ * @brief Base address of the TIM4 peripheral.
+ *
+ * This macro defines the base address of the TIM4 (Timer 4) peripheral.
+ */
+
 #define TIM4_BASE                       (APB1PERIPH_BASE + 0x0800UL)
 
-/*!< APB2 peripherals */
-#define SYSCFG_BASE                     (PERIPH_BASE+0x0013800)
-#define EXTI_BASE                       (PERIPH_BASE+0x0013C00)
+/**
+ * @def SYSCFG_BASE
+ * @brief Base address of the SYSCFG peripheral.
+ *
+ * This macro defines the base address of the SYSCFG peripheral.
+ */
+
+#define SYSCFG_BASE                     (PERIPH_BASE + 0x0013800)
+
+/**
+ * @def EXTI_BASE
+ * @brief Base address of the EXTI (External Interrupt/Event Controller) peripheral.
+ *
+ * This macro defines the base address of the EXTI peripheral.
+ */
+
+#define EXTI_BASE                       (PERIPH_BASE + 0x0013C00)
+
+/**
+ * @def TIM1_BASE
+ * @brief Base address of the TIM1 peripheral.
+ *
+ * This macro defines the base address of the TIM1 (Timer 1) peripheral.
+ */
+
 #define TIM1_BASE                       (APB2PERIPH_BASE + 0x0000UL)
 
-#define RCC_BASE                        (PERIPH_BASE+0x00023800UL)
+/**
+ * @def RCC_BASE
+ * @brief Base address of the RCC (Reset and Clock Control) peripheral.
+ *
+ * This macro defines the base address of the RCC peripheral.
+ */
 
-#define GPIOA_BASE                      (PERIPH_BASE+0x00020000UL)
-#define GPIOB_BASE                      (PERIPH_BASE+0x00020400UL)
-#define GPIOC_BASE                      (PERIPH_BASE+0x00020800UL)
-#define GPIOD_BASE                      (PERIPH_BASE+0x00020C00UL)
-#define GPIOE_BASE                      (PERIPH_BASE+0x00021000UL)
-#define GPIOH_BASE                      (PERIPH_BASE+0x00021C00UL)
+#define RCC_BASE                        (PERIPH_BASE + 0x00023800UL)
+
+/**
+ * @def GPIOA_BASE
+ * @brief Base address of the GPIOA peripheral.
+ *
+ * This macro defines the base address of the GPIOA peripheral.
+ */
+
+#define GPIOA_BASE                      (PERIPH_BASE + 0x00020000UL)
+
+/**
+ * @def GPIOB_BASE
+ * @brief Base address of the GPIOB peripheral.
+ *
+ * This macro defines the base address of the GPIOB peripheral.
+ */
+
+#define GPIOB_BASE                      (PERIPH_BASE + 0x00020400UL)
+
+/**
+ * @def GPIOC_BASE
+ * @brief Base address of the GPIOC peripheral.
+ *
+ * This macro defines the base address of the GPIOC peripheral.
+ */
+
+#define GPIOC_BASE                      (PERIPH_BASE + 0x00020800UL)
+
+/**
+ * @def GPIOD_BASE
+ * @brief Base address of the GPIOD peripheral.
+ *
+ * This macro defines the base address of the GPIOD peripheral.
+ */
+
+#define GPIOD_BASE                      (PERIPH_BASE + 0x00020C00UL)
+
+/**
+ * @def GPIOE_BASE
+ * @brief Base address of the GPIOE peripheral.
+ *
+ * This macro defines the base address of the GPIOE peripheral.
+ */
+
+#define GPIOE_BASE                      (PERIPH_BASE + 0x00021000UL)
+
+/**
+ * @def GPIOH_BASE
+ * @brief Base address of the GPIOH peripheral.
+ *
+ * This macro defines the base address of the GPIOH peripheral.
+ */
+
+#define GPIOH_BASE                      (PERIPH_BASE + 0x00021C00UL)
+
+/**
+ * @enum GPIO_Port_t
+ * @brief Enumeration of GPIO ports.
+ *
+ * This enumeration defines the available GPIO ports, such as GPIO_PORTA, GPIO_PORTB, GPIO_PORTC.
+ */
 
 typedef enum {
 	GPIO_PORTA,
@@ -47,11 +253,25 @@ typedef enum {
 	GPIO_PORTC,
 } GPIO_Port_t;
 
+/**
+ * @enum USART_Index_t
+ * @brief Enumeration of USART indexes.
+ *
+ * This enumeration defines the indexes for USART peripherals, such as USART1_INDEX, USART2_INDEX, USART3_INDEX.
+ */
+
 typedef enum {
 	USART1_INDEX = 0,
 	USART2_INDEX = 1,
 	USART3_INDEX = 2,
 } USART_Index_t;
+
+/**
+ * @enum SysBus_t
+ * @brief Enumeration of system buses.
+ *
+ * This enumeration defines the available system buses, such as APB1_BUS, APB2_BUS, AHB1_BUS, AHB2_BUS.
+ */
 
 typedef enum {
 	APB1_BUS,
@@ -60,21 +280,50 @@ typedef enum {
 	AHB2_BUS
 } SysBus_t;
 
+/**
+ * @enum SysClk_t
+ * @brief Enumeration of system clock sources.
+ *
+ * This enumeration defines the available system clock sources, such as HSI_CLOCK, HSE_CLOCK, PLL_CLOCK.
+ */
+
 typedef enum {
 	HSI_CLOCK,
 	HSE_CLOCK,
 	PLL_CLOCK
 } SysClk_t;
 
+/**
+ * @enum ClkType_t
+ * @brief Enumeration of clock types.
+ *
+ * This enumeration defines the types of clock sources, such as RC_CLOCK, CRYSTAL_CLOCK.
+ */
+
 typedef enum {
 	RC_CLOCK,
 	CRYSTAL_CLOCK,
 } ClkType_t;
 
+/**
+ * @enum Pin_State_t
+ * @brief Enumeration of pin states.
+ *
+ * This enumeration defines the states of a pin, such as PIN_RESET, PIN_SET.
+ */
+
 typedef enum {
 	PIN_RESET = 0,
 	PIN_SET = 1,
 } Pin_State_t;
+
+/**
+ * @enum SysClk_Prescaler_t
+ * @brief Enumeration of system clock prescaler options.
+ *
+ * This enumeration defines the available options for system clock prescaler. It represents the prescaler values used to divide the system clock frequency.
+ * The options include SYSCLK_NOT_DIVIDE, SYSCLK_PRESCALER_BY2, SYSCLK_PRESCALER_BY4, SYSCLK_PRESCALER_BY8, SYSCLK_PRESCALER_BY16, SYSCLK_PRESCALER_BY64, SYSCLK_PRESCALER_BY128, SYSCLK_PRESCALER_BY256, SYSCLK_PRESCALER_BY512.
+ */
 
 typedef enum {
 	SYSCLK_NOT_DIVIDE = 0000,
@@ -88,6 +337,17 @@ typedef enum {
 	SYSCLK_PRESCALER_BY512 = 1111
 } SysClk_Prescaler_t;
 
+/**
+ * @enum IRQ_Num_t
+ * @brief Enumeration of interrupt numbers for Cortex-M4 and STM32 specific interrupts.
+ *
+ * This enumeration defines the interrupt numbers for Cortex-M4 processor exceptions and STM32 specific interrupts.
+ * The enumeration values represent the interrupt numbers associated with each interrupt source.
+ * The Cortex-M4 processor exceptions include NonMaskableInt_IRQn, MemoryManagement_IRQn, BusFault_IRQn, UsageFault_IRQn, SVCall_IRQn,
+ * DebugMonitor_IRQn, PendSV_IRQn, and SysTick_IRQn.
+ * The STM32 specific interrupts include various interrupt numbers such as WWDG_IRQn, PVD_IRQn, TAMP_STAMP_IRQn, RTC_WKUP_IRQn, FLASH_IRQn,
+ * RCC_IRQn, EXTI0_IRQn, EXTI1_IRQn, EXTI2_IRQn, EXTI3_IRQn, EXTI4_IRQn, DMA1_Stream0_IRQn, DMA1_Stream1_IRQn, DMA1_Stream2_IRQn, and so on.
+ */
 typedef enum {
 /******  Cortex-M4 Processor Exceptions Numbers ****************************************************************/
 	NonMaskableInt_IRQn = -14,    /*!< 2 Non Maskable Interrupt                                          */
@@ -157,4 +417,4 @@ typedef enum {
 	SPI4_IRQn = 84       /*!< SPI4 global Interrupt                                            */
 } IRQ_Num_t;
 
-#endif /* STM32F4XX__PRIVATE_H_ */
+#endif /* STM32F4XX_DEVICE_HEADER_H_ */
