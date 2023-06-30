@@ -1,193 +1,868 @@
+/**
+ * @file MCAL_TIM_Private.h
+ * @brief This file contains the private of the MCAL_TIM driver.
+ *
+ * @author Ahmed Abu Raya
+ * @date 2023-06-20
+ */
+
 #ifndef MCAL_TIM_PRIVATE_H_
 #define MCAL_TIM_PRIVATE_H_
 
+/**
+ * @headerfile "STD_TYPES.h"
+ * @brief This header file contains the standard data types.
+ */
 #include "STD_TYPES.h"
+
+/**
+ * @headerfile "STM32F4xx_Device_Header.h"
+ * @brief Include the header file for the STM32F4xx device.
+ */
 #include "STM32F4xx_Device_Header.h"
 
+/**
+ * @struct TIM_TypeDef
+ * @brief TIM register structure.
+ */
 typedef struct {
-	__IO uint32_t CR1;         /*!< TIM control register 1,              Address offset: 0x00 */
-	__IO uint32_t CR2;         /*!< TIM control register 2,              Address offset: 0x04 */
-	__IO uint32_t SMCR;        /*!< TIM slave mode control register,     Address offset: 0x08 */
-	__IO uint32_t DIER;        /*!< TIM DMA/interrupt enable register,   Address offset: 0x0C */
-	__IO uint32_t SR;          /*!< TIM status register,                 Address offset: 0x10 */
-	__IO uint32_t EGR;         /*!< TIM event generation register,       Address offset: 0x14 */
-	__IO uint32_t CCMR1;       /*!< TIM capture/compare mode register 1, Address offset: 0x18 */
-	__IO uint32_t CCMR2;       /*!< TIM capture/compare mode register 2, Address offset: 0x1C */
-	__IO uint32_t CCER;        /*!< TIM capture/compare enable register, Address offset: 0x20 */
-	__IO uint32_t CNT;         /*!< TIM counter register,                Address offset: 0x24 */
-	__IO uint32_t PSC;         /*!< TIM prescaler,                       Address offset: 0x28 */
-	__IO uint32_t ARR;         /*!< TIM auto-reload register,            Address offset: 0x2C */
-	__IO uint32_t RCR;         /*!< TIM repetition counter register,     Address offset: 0x30 */
-	__IO uint32_t CCR1;        /*!< TIM capture/compare register 1,      Address offset: 0x34 */
-	__IO uint32_t CCR2;        /*!< TIM capture/compare register 2,      Address offset: 0x38 */
-	__IO uint32_t CCR3;        /*!< TIM capture/compare register 3,      Address offset: 0x3C */
-	__IO uint32_t CCR4;        /*!< TIM capture/compare register 4,      Address offset: 0x40 */
-	__IO uint32_t BDTR;        /*!< TIM break and dead-time register,    Address offset: 0x44 */
-	__IO uint32_t DCR;         /*!< TIM DMA control register,            Address offset: 0x48 */
-	__IO uint32_t DMAR;        /*!< TIM DMA address for full transfer,   Address offset: 0x4C */
-	__IO uint32_t OR;          /*!< TIM option register,                 Address offset: 0x50 */
+	/**
+	 * @brief TIM control register 1.
+	 */
+	__IO uint32_t CR1;
+	/**
+	 * @brief TIM control register 2.
+	 */
+	__IO uint32_t CR2;
+	/**
+	 * @brief TIM slave mode control register.
+	 */
+	__IO uint32_t SMCR;
+	/**
+	 * @brief TIM DMA/interrupt enable register.
+	 */
+	__IO uint32_t DIER;
+	/**
+	 * @brief TIM status register.
+	 */
+	__IO uint32_t SR;
+	/**
+	 * @brief TIM event generation register.
+	 */
+	__IO uint32_t EGR;
+	/**
+	 * @brief TIM capture/compare mode register 1.
+	 */
+	__IO uint32_t CCMR1;
+	/**
+	 * @brief TIM capture/compare mode register 2.
+	 */
+	__IO uint32_t CCMR2;
+	/**
+	 * @brief TIM capture/compare enable register.
+	 */
+	__IO uint32_t CCER;
+	/**
+	 * @brief TIM counter register.
+	 */
+	__IO uint32_t CNT;
+	/**
+	 * @brief TIM prescaler.
+	 */
+	__IO uint32_t PSC;
+	/**
+	 * @brief TIM auto-reload register.
+	 */
+	__IO uint32_t ARR;
+	/**
+	 * @brief TIM repetition counter register.
+	 */
+	__IO uint32_t RCR;
+	/**
+	 * @brief TIM capture/compare register 1.
+	 */
+	__IO uint32_t CCR1;
+	/**
+	 * @brief TIM capture/compare register 2.
+	 */
+	__IO uint32_t CCR2;
+	/**
+	 * @brief TIM capture/compare register 3.
+	 */
+	__IO uint32_t CCR3;
+	/**
+	 * @brief TIM capture/compare register 4.
+	 */
+	__IO uint32_t CCR4;
+	/**
+	 * @brief TIM break and dead-time register.
+	 */
+	__IO uint32_t BDTR;
+	/**
+	 * @brief TIM DMA control register.
+	 */
+	__IO uint32_t DCR;
+	/**
+	 * @brief TIM DMA address for full transfer.
+	 */
+	__IO uint32_t DMAR;
+	/**
+	 * @brief TIM option register.
+	 */
+	__IO uint32_t OR;
 } TIM_TypeDef;
 
+/**
+ * @def TIM1
+ * @brief TIM1 peripheral base address.
+ */
 #define TIM1                ((TIM_TypeDef *)TIM1_BASE)
+
+/**
+ * @def TIM2
+ * @brief TIM2 peripheral base address.
+ */
 #define TIM2                ((TIM_TypeDef *)TIM2_BASE)
+
+/**
+ * @def TIM3
+ * @brief TIM3 peripheral base address.
+ */
 #define TIM3                ((TIM_TypeDef *)TIM3_BASE)
+
+/**
+ * @def TIM4
+ * @brief TIM4 peripheral base address.
+ */
 #define TIM4                ((TIM_TypeDef *)TIM4_BASE)
 
+/**
+ * @def TIM_CR1_CEN_Pos
+ * @brief Position of the CEN (Counter Enable) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_CEN_Pos         (0U)
+
+/**
+ * @def TIM_CR1_CEN_Msk
+ * @brief Bit mask of the CEN (Counter Enable) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_CEN_Msk         (0x1U << TIM_CR1_CEN_Pos)
+
+/**
+ * @def TIM_CR1_CEN
+ * @brief Counter Enable (CEN) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_CEN             TIM_CR1_CEN_Msk
 
+/**
+ * @def TIM_CR1_UDIS_Pos
+ * @brief Position of the UDIS (Update Disable) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_UDIS_Pos        (1U)
+
+/**
+ * @def TIM_CR1_UDIS_Msk
+ * @brief Bit mask of the UDIS (Update Disable) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_UDIS_Msk        (0x1U << TIM_CR1_UDIS_Pos)
+
+/**
+ * @def TIM_CR1_UDIS
+ * @brief Update Disable (UDIS) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_UDIS            TIM_CR1_UDIS_Msk
 
+/**
+ * @def TIM_CR1_URS_Pos
+ * @brief Position of the URS (Update Request Source) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_URS_Pos         (2U)
+
+/**
+ * @def TIM_CR1_URS_Msk
+ * @brief Bit mask of the URS (Update Request Source) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_URS_Msk         (0x1U << TIM_CR1_URS_Pos)
+
+/**
+ * @def TIM_CR1_URS
+ * @brief Update Request Source (URS) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_URS             TIM_CR1_URS_Msk
 
+/**
+ * @def TIM_CR1_OPM_Pos
+ * @brief Position of the OPM (One-Pulse Mode) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_OPM_Pos         (3U)
+
+/**
+ * @def TIM_CR1_OPM_Msk
+ * @brief Bit mask of the OPM (One-Pulse Mode) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_OPM_Msk         (0x1U << TIM_CR1_OPM_Pos)
+
+/**
+ * @def TIM_CR1_OPM
+ * @brief One-Pulse Mode (OPM) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_OPM             TIM_CR1_OPM_Msk
 
+/**
+ * @def TIM_CR1_DIR_Pos
+ * @brief Position of the DIR (Direction) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_DIR_Pos         (4U)
+
+/**
+ * @def TIM_CR1_DIR_Msk
+ * @brief Bit mask of the DIR (Direction) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_DIR_Msk         (0x1U << TIM_CR1_DIR_Pos)
+
+/**
+ * @def TIM_CR1_DIR
+ * @brief Direction (DIR) bit in the TIM_CR1 register.
+ */
 #define TIM_CR1_DIR             TIM_CR1_DIR_Msk
 
+/**
+ * @def TIM_CR1_CMS_Pos
+ * @brief Position of the CMS (Center-aligned Mode Selection) bits in the TIM_CR1 register.
+ */
 #define TIM_CR1_CMS_Pos           (5U)
-#define TIM_CR1_CMS_Msk           (0x3UL << TIM_CR1_CMS_Pos)                    /*!< 0x00000060 */
-#define TIM_CR1_CMS               TIM_CR1_CMS_Msk                              /*!<CMS[1:0] bits (Center-aligned mode selection) */
+
+/**
+ * @def TIM_CR1_CMS_Msk
+ * @brief Bit mask of the CMS (Center-aligned Mode Selection) bits in the TIM_CR1 register.
+ */
+#define TIM_CR1_CMS_Msk           (0x3UL << TIM_CR1_CMS_Pos)
+
+/**
+ * @def TIM_CR1_CMS
+ * @brief Center-aligned Mode Selection (CMS) bits in the TIM_CR1 register.
+ */
+#define TIM_CR1_CMS               TIM_CR1_CMS_Msk
+
+
+/**
+ * @def TIM_CR1_CMS_0
+ * @brief Value of the CMS (Center-aligned Mode Selection) bits with a shift of TIM_CR1_CMS_Pos.
+ */
 #define TIM_CR1_CMS_0             (0x1UL << TIM_CR1_CMS_Pos)                    /*!< 0x0020 */
+
+/**
+ * @def TIM_CR1_CMS_1
+ * @brief Value of the CMS (Center-aligned Mode Selection) bits with a shift of TIM_CR1_CMS_Pos.
+ */
 #define TIM_CR1_CMS_1             (0x2UL << TIM_CR1_CMS_Pos)                    /*!< 0x0040 */
 
-#define TIM_CR1_ARPE_Pos          (7U)
-#define TIM_CR1_ARPE_Msk          (0x1UL << TIM_CR1_ARPE_Pos)                   /*!< 0x00000080 */
-#define TIM_CR1_ARPE              TIM_CR1_ARPE_Msk                             /*!<Auto-reload preload enable     */
-
-#define TIM_CR1_CKD_Pos           (8U)
-#define TIM_CR1_CKD_Msk           (0x3UL << TIM_CR1_CKD_Pos)                    /*!< 0x00000300 */
-#define TIM_CR1_CKD               TIM_CR1_CKD_Msk                              /*!<CKD[1:0] bits (clock division) */
-#define TIM_CR1_CKD_0             (0x1UL << TIM_CR1_CKD_Pos)                    /*!< 0x0100 */
-#define TIM_CR1_CKD_1             (0x2UL << TIM_CR1_CKD_Pos)                    /*!< 0x0200 */
-
+/**
+ * @def TIM_CCMR1_CC1S_Pos
+ * @brief Position of the CC1S (Capture/Compare 1 Selection) bits in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_CC1S_Pos                  (0U)
-#define TIM_CCMR1_CC1S_Msk                  (0x3UL << TIM_CCMR1_CC1S_Pos)       /*!< 0x00000003 */
-#define TIM_CCMR1_CC1S                      TIM_CCMR1_CC1S_Msk                 /*!<CC1S[1:0] bits (Capture/Compare 1 Selection) */
+
+/**
+ * @def TIM_CCMR1_CC1S_Msk
+ * @brief Bit mask of the CC1S (Capture/Compare 1 Selection) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_CC1S_Msk                  (0x3UL << TIM_CCMR1_CC1S_Pos)
+
+/**
+ * @def TIM_CCMR1_CC1S
+ * @brief CC1S (Capture/Compare 1 Selection) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_CC1S                      TIM_CCMR1_CC1S_Msk
+
+/**
+ * @def TIM_CCMR1_CC1S_0
+ * @brief Value of the CC1S (Capture/Compare 1 Selection) bits with a shift of TIM_CCMR1_CC1S_Pos.
+ */
 #define TIM_CCMR1_CC1S_0                    (0x1UL << TIM_CCMR1_CC1S_Pos)       /*!< 0x00000001 */
+
+/**
+ * @def TIM_CCMR1_CC1S_1
+ * @brief Value of the CC1S (Capture/Compare 1 Selection) bits with a shift of TIM_CCMR1_CC1S_Pos.
+ */
 #define TIM_CCMR1_CC1S_1                    (0x2UL << TIM_CCMR1_CC1S_Pos)       /*!< 0x00000002 */
 
+/**
+ * @def TIM_CCMR1_OC1FE_Pos
+ * @brief Position of the OC1FE (Output Compare 1 Fast enable) bit in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_OC1FE_Pos                 (2U)
-#define TIM_CCMR1_OC1FE_Msk                 (0x1UL << TIM_CCMR1_OC1FE_Pos)      /*!< 0x00000004 */
-#define TIM_CCMR1_OC1FE                     TIM_CCMR1_OC1FE_Msk                /*!<Output Compare 1 Fast enable */
-#define TIM_CCMR1_OC1PE_Pos                 (3U)
-#define TIM_CCMR1_OC1PE_Msk                 (0x1UL << TIM_CCMR1_OC1PE_Pos)      /*!< 0x00000008 */
-#define TIM_CCMR1_OC1PE                     TIM_CCMR1_OC1PE_Msk                /*!<Output Compare 1 Preload enable */
 
+/**
+ * @def TIM_CCMR1_OC1FE_Msk
+ * @brief Bit mask of the OC1FE (Output Compare 1 Fast enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC1FE_Msk                 (0x1UL << TIM_CCMR1_OC1FE_Pos)
+
+/**
+ * @def TIM_CCMR1_OC1FE
+ * @brief OC1FE (Output Compare 1 Fast enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC1FE                     TIM_CCMR1_OC1FE_Msk
+
+/**
+ * @def TIM_CCMR1_OC1PE_Pos
+ * @brief Position of the OC1PE (Output Compare 1 Preload enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC1PE_Pos                 (3U)
+
+/**
+ * @def TIM_CCMR1_OC1PE_Msk
+ * @brief Bit mask of the OC1PE (Output Compare 1 Preload enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC1PE_Msk                 (0x1UL << TIM_CCMR1_OC1PE_Pos)
+
+/**
+ * @def TIM_CCMR1_OC1PE
+ * @brief OC1PE (Output Compare 1 Preload enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC1PE                     TIM_CCMR1_OC1PE_Msk
+
+/**
+ * @def TIM_CCMR1_OC1M_Pos
+ * @brief Position of the OC1M (Output Compare 1 Mode) bits in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_OC1M_Pos                  (4U)
-#define TIM_CCMR1_OC1M_Msk                  (0x7UL << TIM_CCMR1_OC1M_Pos)       /*!< 0x00000070 */
-#define TIM_CCMR1_OC1M                      TIM_CCMR1_OC1M_Msk                 /*!<OC1M[2:0] bits (Output Compare 1 Mode) */
+
+/**
+ * @def TIM_CCMR1_OC1M_Msk
+ * @brief Bit mask of the OC1M (Output Compare 1 Mode) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC1M_Msk                  (0x7UL << TIM_CCMR1_OC1M_Pos)
+
+/**
+ * @def TIM_CCMR1_OC1M
+ * @brief OC1M (Output Compare 1 Mode) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC1M                      TIM_CCMR1_OC1M_Msk
+
+/**
+ * @def TIM_CCMR1_OC1M_0
+ * @brief Value of the OC1M (Output Compare 1 Mode) bits with a shift of TIM_CCMR1_OC1M_Pos.
+ */
 #define TIM_CCMR1_OC1M_0                    (0x1UL << TIM_CCMR1_OC1M_Pos)       /*!< 0x00000010 */
-#define TIM_CCMR1_OC1M_1                    (0x2UL << TIM_CCMR1_OC1M_Pos)       /*!< 0x00000020 */
+
+/**
+ * @def TIM_CCMR1_OC1M_1
+ * @brief Value of the OC1M (Output Compare 1 Mode) bits with a shift of TIM_CCMR1_OC1M_Pos.
+ */
+#define TIM_CCMR1_OC1M_1                    (0x2UL << TIM_CCMR1_OC1M_Pos)
+
+
+/**
+ * @def TIM_CCMR1_OC1M_2
+ * @brief Value of the OC1M (Output Compare 1 Mode) bits with a shift of TIM_CCMR1_OC1M_Pos.
+ */
 #define TIM_CCMR1_OC1M_2                    (0x4UL << TIM_CCMR1_OC1M_Pos)       /*!< 0x00000040 */
 
+/**
+ * @def TIM_CCMR1_OC1CE_Pos
+ * @brief Position of the OC1CE (Output Compare 1 Clear Enable) bit in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_OC1CE_Pos                 (7U)
-#define TIM_CCMR1_OC1CE_Msk                 (0x1UL << TIM_CCMR1_OC1CE_Pos)      /*!< 0x00000080 */
-#define TIM_CCMR1_OC1CE                     TIM_CCMR1_OC1CE_Msk                /*!<Output Compare 1Clear Enable */
 
+/**
+ * @def TIM_CCMR1_OC1CE_Msk
+ * @brief Bit mask of the OC1CE (Output Compare 1 Clear Enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC1CE_Msk                 (0x1UL << TIM_CCMR1_OC1CE_Pos)
+
+/**
+ * @def TIM_CCMR1_OC1CE
+ * @brief OC1CE (Output Compare 1 Clear Enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC1CE                     TIM_CCMR1_OC1CE_Msk
+
+/**
+ * @def TIM_CCMR1_CC2S_Pos
+ * @brief Position of the CC2S (Capture/Compare 2 Selection) bits in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_CC2S_Pos                  (8U)
-#define TIM_CCMR1_CC2S_Msk                  (0x3UL << TIM_CCMR1_CC2S_Pos)       /*!< 0x00000300 */
-#define TIM_CCMR1_CC2S                      TIM_CCMR1_CC2S_Msk                 /*!<CC2S[1:0] bits (Capture/Compare 2 Selection) */
+
+/**
+ * @def TIM_CCMR1_CC2S_Msk
+ * @brief Bit mask of the CC2S (Capture/Compare 2 Selection) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_CC2S_Msk                  (0x3UL << TIM_CCMR1_CC2S_Pos)
+
+/**
+ * @def TIM_CCMR1_CC2S
+ * @brief CC2S (Capture/Compare 2 Selection) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_CC2S                      TIM_CCMR1_CC2S_Msk
+
+/**
+ * @def TIM_CCMR1_CC2S_0
+ * @brief Value of the CC2S (Capture/Compare 2 Selection) bits with a shift of TIM_CCMR1_CC2S_Pos.
+ */
 #define TIM_CCMR1_CC2S_0                    (0x1UL << TIM_CCMR1_CC2S_Pos)       /*!< 0x00000100 */
+
+/**
+ * @def TIM_CCMR1_CC2S_1
+ * @brief Value of the CC2S (Capture/Compare 2 Selection) bits with a shift of TIM_CCMR1_CC2S_Pos.
+ */
 #define TIM_CCMR1_CC2S_1                    (0x2UL << TIM_CCMR1_CC2S_Pos)       /*!< 0x00000200 */
 
+/**
+ * @def TIM_CCMR1_OC2FE_Pos
+ * @brief Position of the OC2FE (Output Compare 2 Fast Enable) bit in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_OC2FE_Pos                 (10U)
-#define TIM_CCMR1_OC2FE_Msk                 (0x1UL << TIM_CCMR1_OC2FE_Pos)      /*!< 0x00000400 */
-#define TIM_CCMR1_OC2FE                     TIM_CCMR1_OC2FE_Msk                /*!<Output Compare 2 Fast enable */
-#define TIM_CCMR1_OC2PE_Pos                 (11U)
-#define TIM_CCMR1_OC2PE_Msk                 (0x1UL << TIM_CCMR1_OC2PE_Pos)      /*!< 0x00000800 */
-#define TIM_CCMR1_OC2PE                     TIM_CCMR1_OC2PE_Msk                /*!<Output Compare 2 Preload enable */
 
+/**
+ * @def TIM_CCMR1_OC2FE_Msk
+ * @brief Bit mask of the OC2FE (Output Compare 2 Fast Enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC2FE_Msk                 (0x1UL << TIM_CCMR1_OC2FE_Pos)
+
+/**
+ * @def TIM_CCMR1_OC2FE
+ * @brief OC2FE (Output Compare 2 Fast Enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC2FE                     TIM_CCMR1_OC2FE_Msk
+
+/**
+ * @def TIM_CCMR1_OC2PE_Pos
+ * @brief Position of the OC2PE (Output Compare 2 Preload Enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC2PE_Pos                 (11U)
+
+/**
+ * @def TIM_CCMR1_OC2PE_Msk
+ * @brief Bit mask of the OC2PE (Output Compare 2 Preload Enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC2PE_Msk                 (0x1UL << TIM_CCMR1_OC2PE_Pos)
+
+/**
+ * @def TIM_CCMR1_OC2PE
+ * @brief OC2PE (Output Compare 2 Preload Enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC2PE                     TIM_CCMR1_OC2PE_Msk
+
+/**
+ * @def TIM_CCMR1_OC2M_Pos
+ * @brief Position of the OC2M (Output Compare 2 Mode) bits in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_OC2M_Pos                  (12U)
-#define TIM_CCMR1_OC2M_Msk                  (0x7UL << TIM_CCMR1_OC2M_Pos)       /*!< 0x00007000 */
-#define TIM_CCMR1_OC2M                      TIM_CCMR1_OC2M_Msk                 /*!<OC2M[2:0] bits (Output Compare 2 Mode) */
+
+/**
+ * @def TIM_CCMR1_OC2M_Msk
+ * @brief Bit mask of the OC2M (Output Compare 2 Mode) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC2M_Msk                  (0x7UL << TIM_CCMR1_OC2M_Pos)
+
+/**
+ * @def TIM_CCMR1_OC2M
+ * @brief OC2M (Output Compare 2 Mode) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC2M                      TIM_CCMR1_OC2M_Msk
+
+/**
+ * @def TIM_CCMR1_OC2M_0
+ * @brief Value of the OC2M (Output Compare 2 Mode) bits with a shift of TIM_CCMR1_OC2M_Pos.
+ */
 #define TIM_CCMR1_OC2M_0                    (0x1UL << TIM_CCMR1_OC2M_Pos)       /*!< 0x00001000 */
-#define TIM_CCMR1_OC2M_1                    (0x2UL << TIM_CCMR1_OC2M_Pos)       /*!< 0x00002000 */
+
+/**
+ * @def TIM_CCMR1_OC2M_1
+ * @brief Value of the OC2M (Output Compare 2 Mode) bits with a shift of TIM_CCMR1_OC2M_Pos.
+ */
+#define TIM_CCMR1_OC2M_1                    (0x2UL << TIM_CCMR1_OC2M_Pos)
+
+/**
+ * @def TIM_CCMR1_OC2M_2
+ * @brief Value of the OC2M (Output Compare 2 Mode) bits with a shift of TIM_CCMR1_OC2M_Pos.
+ */
 #define TIM_CCMR1_OC2M_2                    (0x4UL << TIM_CCMR1_OC2M_Pos)       /*!< 0x00004000 */
 
+/**
+ * @def TIM_CCMR1_OC2CE_Pos
+ * @brief Position of the OC2CE (Output Compare 2 Clear Enable) bit in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_OC2CE_Pos                 (15U)
-#define TIM_CCMR1_OC2CE_Msk                 (0x1UL << TIM_CCMR1_OC2CE_Pos)      /*!< 0x00008000 */
-#define TIM_CCMR1_OC2CE                     TIM_CCMR1_OC2CE_Msk                /*!<Output Compare 2 Clear Enable */
 
+/**
+ * @def TIM_CCMR1_OC2CE_Msk
+ * @brief Bit mask of the OC2CE (Output Compare 2 Clear Enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC2CE_Msk                 (0x1UL << TIM_CCMR1_OC2CE_Pos)
+
+/**
+ * @def TIM_CCMR1_OC2CE
+ * @brief OC2CE (Output Compare 2 Clear Enable) bit in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_OC2CE                     TIM_CCMR1_OC2CE_Msk
+
+/**
+ * @def TIM_CCMR1_IC1PSC_Pos
+ * @brief Position of the IC1PSC (Input Capture 1 Prescaler) bits in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_IC1PSC_Pos                (2U)
-#define TIM_CCMR1_IC1PSC_Msk                (0x3UL << TIM_CCMR1_IC1PSC_Pos)     /*!< 0x0000000C */
-#define TIM_CCMR1_IC1PSC                    TIM_CCMR1_IC1PSC_Msk               /*!<IC1PSC[1:0] bits (Input Capture 1 Prescaler) */
+
+/**
+ * @def TIM_CCMR1_IC1PSC_Msk
+ * @brief Bit mask of the IC1PSC (Input Capture 1 Prescaler) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_IC1PSC_Msk                (0x3UL << TIM_CCMR1_IC1PSC_Pos)
+
+/**
+ * @def TIM_CCMR1_IC1PSC
+ * @brief IC1PSC (Input Capture 1 Prescaler) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_IC1PSC                    TIM_CCMR1_IC1PSC_Msk
+
+/**
+ * @def TIM_CCMR1_IC1PSC_0
+ * @brief Value of the IC1PSC (Input Capture 1 Prescaler) bits with a shift of TIM_CCMR1_IC1PSC_Pos.
+ */
 #define TIM_CCMR1_IC1PSC_0                  (0x1UL << TIM_CCMR1_IC1PSC_Pos)     /*!< 0x00000004 */
+
+/**
+ * @def TIM_CCMR1_IC1PSC_1
+ * @brief Value of the IC1PSC (Input Capture 1 Prescaler) bits with a shift of TIM_CCMR1_IC1PSC_Pos.
+ */
 #define TIM_CCMR1_IC1PSC_1                  (0x2UL << TIM_CCMR1_IC1PSC_Pos)     /*!< 0x00000008 */
 
+/**
+ * @def TIM_CCMR1_IC1F_Pos
+ * @brief Position of the IC1F (Input Capture 1 Filter) bits in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_IC1F_Pos                  (4U)
-#define TIM_CCMR1_IC1F_Msk                  (0xFUL << TIM_CCMR1_IC1F_Pos)       /*!< 0x000000F0 */
-#define TIM_CCMR1_IC1F                      TIM_CCMR1_IC1F_Msk                 /*!<IC1F[3:0] bits (Input Capture 1 Filter) */
+
+/**
+ * @def TIM_CCMR1_IC1F_Msk
+ * @brief Bit mask of the IC1F (Input Capture 1 Filter) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_IC1F_Msk                  (0xFUL << TIM_CCMR1_IC1F_Pos)
+
+/**
+ * @def TIM_CCMR1_IC1F
+ * @brief IC1F (Input Capture 1 Filter) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_IC1F                      TIM_CCMR1_IC1F_Msk
+
+/**
+ * @def TIM_CCMR1_IC1F_0
+ * @brief Value of the IC1F (Input Capture 1 Filter) bits with a shift of TIM_CCMR1_IC1F_Pos.
+ */
 #define TIM_CCMR1_IC1F_0                    (0x1UL << TIM_CCMR1_IC1F_Pos)       /*!< 0x00000010 */
+
+/**
+ * @def TIM_CCMR1_IC1F_1
+ * @brief Value of the IC1F (Input Capture 1 Filter) bits with a shift of TIM_CCMR1_IC1F_Pos.
+ */
 #define TIM_CCMR1_IC1F_1                    (0x2UL << TIM_CCMR1_IC1F_Pos)       /*!< 0x00000020 */
+
+/**
+ * @def TIM_CCMR1_IC1F_2
+ * @brief Value of the IC1F (Input Capture 1 Filter) bits with a shift of TIM_CCMR1_IC1F_Pos.
+ */
 #define TIM_CCMR1_IC1F_2                    (0x4UL << TIM_CCMR1_IC1F_Pos)       /*!< 0x00000040 */
+
+/**
+ * @def TIM_CCMR1_IC1F_3
+ * @brief Value of the IC1F (Input Capture 1 Filter) bits with a shift of TIM_CCMR1_IC1F_Pos.
+ */
 #define TIM_CCMR1_IC1F_3                    (0x8UL << TIM_CCMR1_IC1F_Pos)       /*!< 0x00000080 */
 
+/**
+ * @def TIM_CCMR1_IC2PSC_Pos
+ * @brief Position of the IC2PSC (Input Capture 2 Prescaler) bits in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_IC2PSC_Pos                (10U)
-#define TIM_CCMR1_IC2PSC_Msk                (0x3UL << TIM_CCMR1_IC2PSC_Pos)     /*!< 0x00000C00 */
-#define TIM_CCMR1_IC2PSC                    TIM_CCMR1_IC2PSC_Msk               /*!<IC2PSC[1:0] bits (Input Capture 2 Prescaler) */
+
+/**
+ * @def TIM_CCMR1_IC2PSC_Msk
+ * @brief Bit mask of the IC2PSC (Input Capture 2 Prescaler) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_IC2PSC_Msk                (0x3UL << TIM_CCMR1_IC2PSC_Pos)
+
+/**
+ * @def TIM_CCMR1_IC2PSC
+ * @brief IC2PSC (Input Capture 2 Prescaler) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_IC2PSC                    TIM_CCMR1_IC2PSC_Msk
+
+/**
+ * @def TIM_CCMR1_IC2PSC_0
+ * @brief Value of the IC2PSC (Input Capture 2 Prescaler) bits with a shift of TIM_CCMR1_IC2PSC_Pos.
+ */
 #define TIM_CCMR1_IC2PSC_0                  (0x1UL << TIM_CCMR1_IC2PSC_Pos)     /*!< 0x00000400 */
+
+/**
+ * @def TIM_CCMR1_IC2PSC_1
+ * @brief Value of the IC2PSC (Input Capture 2 Prescaler) bits with a shift of TIM_CCMR1_IC2PSC_Pos.
+ */
 #define TIM_CCMR1_IC2PSC_1                  (0x2UL << TIM_CCMR1_IC2PSC_Pos)     /*!< 0x00000800 */
 
+/**
+ * @def TIM_CCMR1_IC2F_Pos
+ * @brief Position of the IC2F (Input Capture 2 Filter) bits in the TIM_CCMR1 register.
+ */
 #define TIM_CCMR1_IC2F_Pos                  (12U)
-#define TIM_CCMR1_IC2F_Msk                  (0xFUL << TIM_CCMR1_IC2F_Pos)       /*!< 0x0000F000 */
-#define TIM_CCMR1_IC2F                      TIM_CCMR1_IC2F_Msk                 /*!<IC2F[3:0] bits (Input Capture 2 Filter) */
+
+/**
+ * @def TIM_CCMR1_IC2F_Msk
+ * @brief Bit mask of the IC2F (Input Capture 2 Filter) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_IC2F_Msk                  (0xFUL << TIM_CCMR1_IC2F_Pos)
+
+/**
+ * @def TIM_CCMR1_IC2F
+ * @brief IC2F (Input Capture 2 Filter) bits in the TIM_CCMR1 register.
+ */
+#define TIM_CCMR1_IC2F                      TIM_CCMR1_IC2F_Msk
+
+/**
+ * @def TIM_CCMR1_IC2F_0
+ * @brief Value of the IC2F (Input Capture 2 Filter) bits with a shift of TIM_CCMR1_IC2F_Pos.
+ */
 #define TIM_CCMR1_IC2F_0                    (0x1UL << TIM_CCMR1_IC2F_Pos)       /*!< 0x00001000 */
-#define TIM_CCMR1_IC2F_1                    (0x2UL << TIM_CCMR1_IC2F_Pos)       /*!< 0x00002000 */
+
+/**
+ * @def TIM_CCMR1_IC2F_1
+ * @brief Value of the IC2F (Input Capture 2 Filter) bits with a shift of TIM_CCMR1_IC2F_Pos.
+ */
+#define TIM_CCMR1_IC2F_1                    (0x2UL << TIM_CCMR1_IC2F_Pos)
+
+/**
+ * @def TIM_CCMR1_IC2F_2
+ * @brief Value of the IC2F (Input Capture 2 Filter) bits with a shift of TIM_CCMR1_IC2F_Pos.
+ */
 #define TIM_CCMR1_IC2F_2                    (0x4UL << TIM_CCMR1_IC2F_Pos)       /*!< 0x00004000 */
+
+/**
+ * @def TIM_CCMR1_IC2F_3
+ * @brief Value of the IC2F (Input Capture 2 Filter) bits with a shift of TIM_CCMR1_IC2F_Pos.
+ */
 #define TIM_CCMR1_IC2F_3                    (0x8UL << TIM_CCMR1_IC2F_Pos)       /*!< 0x00008000 */
 
+/**
+ * @def TIM_CCMR2_CC3S_Pos
+ * @brief Position of the CC3S (Capture/Compare 3 Selection) bits in the TIM_CCMR2 register.
+ */
 #define TIM_CCMR2_CC3S_Pos                  (0U)
-#define TIM_CCMR2_CC3S_Msk                  (0x3UL << TIM_CCMR2_CC3S_Pos)       /*!< 0x00000003 */
-#define TIM_CCMR2_CC3S                      TIM_CCMR2_CC3S_Msk                 /*!<CC3S[1:0] bits (Capture/Compare 3 Selection) */
+
+/**
+ * @def TIM_CCMR2_CC3S_Msk
+ * @brief Bit mask of the CC3S (Capture/Compare 3 Selection) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_CC3S_Msk                  (0x3UL << TIM_CCMR2_CC3S_Pos)
+
+/**
+ * @def TIM_CCMR2_CC3S
+ * @brief CC3S (Capture/Compare 3 Selection) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_CC3S                      TIM_CCMR2_CC3S_Msk
+
+/**
+ * @def TIM_CCMR2_CC3S_0
+ * @brief Value of the CC3S (Capture/Compare 3 Selection) bits with a shift of TIM_CCMR2_CC3S_Pos.
+ */
 #define TIM_CCMR2_CC3S_0                    (0x1UL << TIM_CCMR2_CC3S_Pos)       /*!< 0x00000001 */
+
+/**
+ * @def TIM_CCMR2_CC3S_1
+ * @brief Value of the CC3S (Capture/Compare 3 Selection) bits with a shift of TIM_CCMR2_CC3S_Pos.
+ */
 #define TIM_CCMR2_CC3S_1                    (0x2UL << TIM_CCMR2_CC3S_Pos)       /*!< 0x00000002 */
 
+/**
+ * @def TIM_CCMR2_OC3FE_Pos
+ * @brief Position of the OC3FE (Output Compare 3 Fast enable) bit in the TIM_CCMR2 register.
+ */
 #define TIM_CCMR2_OC3FE_Pos                 (2U)
-#define TIM_CCMR2_OC3FE_Msk                 (0x1UL << TIM_CCMR2_OC3FE_Pos)      /*!< 0x00000004 */
-#define TIM_CCMR2_OC3FE                     TIM_CCMR2_OC3FE_Msk                /*!<Output Compare 3 Fast enable */
+
+/**
+ * @def TIM_CCMR2_OC3FE_Msk
+ * @brief Bit mask of the OC3FE (Output Compare 3 Fast enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3FE_Msk                 (0x1UL << TIM_CCMR2_OC3FE_Pos)
+
+/**
+ * @def TIM_CCMR2_OC3FE
+ * @brief OC3FE (Output Compare 3 Fast enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3FE                     TIM_CCMR2_OC3FE_Msk
+
+/**
+ * @def TIM_CCMR2_OC3PE_Pos
+ * @brief Position of the OC3PE (Output Compare 3 Preload enable) bit in the TIM_CCMR2 register.
+ */
 #define TIM_CCMR2_OC3PE_Pos                 (3U)
-#define TIM_CCMR2_OC3PE_Msk                 (0x1UL << TIM_CCMR2_OC3PE_Pos)      /*!< 0x00000008 */
-#define TIM_CCMR2_OC3PE                     TIM_CCMR2_OC3PE_Msk                /*!<Output Compare 3 Preload enable */
 
+/**
+ * @def TIM_CCMR2_OC3PE_Msk
+ * @brief Bit mask of the OC3PE (Output Compare 3 Preload enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3PE_Msk                 (0x1UL << TIM_CCMR2_OC3PE_Pos)
+
+/**
+ * @def TIM_CCMR2_OC3PE
+ * @brief OC3PE (Output Compare 3 Preload enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3PE                     TIM_CCMR2_OC3PE_Msk
+
+#/**
+ * @def TIM_CCMR2_OC3M_Pos
+ * @brief Position of the OC3M (Output Compare 3 Mode) bits in the TIM_CCMR2 register.
+ */
 #define TIM_CCMR2_OC3M_Pos                  (4U)
-#define TIM_CCMR2_OC3M_Msk                  (0x7UL << TIM_CCMR2_OC3M_Pos)       /*!< 0x00000070 */
-#define TIM_CCMR2_OC3M                      TIM_CCMR2_OC3M_Msk                 /*!<OC3M[2:0] bits (Output Compare 3 Mode) */
-#define TIM_CCMR2_OC3M_0                    (0x1UL << TIM_CCMR2_OC3M_Pos)       /*!< 0x00000010 */
-#define TIM_CCMR2_OC3M_1                    (0x2UL << TIM_CCMR2_OC3M_Pos)       /*!< 0x00000020 */
-#define TIM_CCMR2_OC3M_2                    (0x4UL << TIM_CCMR2_OC3M_Pos)       /*!< 0x00000040 */
 
+/**
+ * @def TIM_CCMR2_OC3M_Msk
+ * @brief Bit mask of the OC3M (Output Compare 3 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3M_Msk                  (0x7UL << TIM_CCMR2_OC3M_Pos)
+
+/**
+ * @def TIM_CCMR2_OC3M
+ * @brief OC3M (Output Compare 3 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3M                      TIM_CCMR2_OC3M_Msk
+
+/**
+ * @def TIM_CCMR2_OC3M_0
+ * @brief Bit 0 of OC3M (Output Compare 3 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3M_0                    (0x1UL << TIM_CCMR2_OC3M_Pos)
+
+/**
+ * @def TIM_CCMR2_OC3M_1
+ * @brief Bit 1 of OC3M (Output Compare 3 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3M_1                    (0x2UL << TIM_CCMR2_OC3M_Pos)
+
+/**
+ * @def TIM_CCMR2_OC3M_2
+ * @brief Bit 2 of OC3M (Output Compare 3 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3M_2                    (0x4UL << TIM_CCMR2_OC3M_Pos)
+
+/**
+ * @def TIM_CCMR2_OC3CE_Pos
+ * @brief Position of the OC3CE (Output Compare 3 Clear Enable) bit in the TIM_CCMR2 register.
+ */
 #define TIM_CCMR2_OC3CE_Pos                 (7U)
-#define TIM_CCMR2_OC3CE_Msk                 (0x1UL << TIM_CCMR2_OC3CE_Pos)      /*!< 0x00000080 */
-#define TIM_CCMR2_OC3CE                     TIM_CCMR2_OC3CE_Msk                /*!<Output Compare 3 Clear Enable */
 
+/**
+ * @def TIM_CCMR2_OC3CE_Msk
+ * @brief Bit mask of the OC3CE (Output Compare 3 Clear Enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3CE_Msk                 (0x1UL << TIM_CCMR2_OC3CE_Pos)
+
+/**
+ * @def TIM_CCMR2_OC3CE
+ * @brief OC3CE (Output Compare 3 Clear Enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC3CE                     TIM_CCMR2_OC3CE_Msk
+
+/**
+ * @def TIM_CCMR2_CC4S_Pos
+ * @brief Position of the CC4S (Capture/Compare 4 Selection) bits in the TIM_CCMR2 register.
+ */
 #define TIM_CCMR2_CC4S_Pos                  (8U)
-#define TIM_CCMR2_CC4S_Msk                  (0x3UL << TIM_CCMR2_CC4S_Pos)       /*!< 0x00000300 */
-#define TIM_CCMR2_CC4S                      TIM_CCMR2_CC4S_Msk                 /*!<CC4S[1:0] bits (Capture/Compare 4 Selection) */
-#define TIM_CCMR2_CC4S_0                    (0x1UL << TIM_CCMR2_CC4S_Pos)       /*!< 0x00000100 */
-#define TIM_CCMR2_CC4S_1                    (0x2UL << TIM_CCMR2_CC4S_Pos)       /*!< 0x00000200 */
 
+/**
+ * @def TIM_CCMR2_CC4S_Msk
+ * @brief Bit mask of the CC4S (Capture/Compare 4 Selection) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_CC4S_Msk                  (0x3UL << TIM_CCMR2_CC4S_Pos)
+
+/**
+ * @def TIM_CCMR2_CC4S
+ * @brief CC4S (Capture/Compare 4 Selection) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_CC4S                      TIM_CCMR2_CC4S_Msk
+
+/**
+ * @def TIM_CCMR2_CC4S_0
+ * @brief Bit 0 of CC4S (Capture/Compare 4 Selection) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_CC4S_0                    (0x1UL << TIM_CCMR2_CC4S_Pos)
+
+/**
+ * @def TIM_CCMR2_CC4S_1
+ * @brief Bit 1 of CC4S (Capture/Compare 4 Selection) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_CC4S_1                    (0x2UL << TIM_CCMR2_CC4S_Pos)
+
+/**
+ * @def TIM_CCMR2_OC4FE_Pos
+ * @brief Position of the OC4FE (Output Compare 4 Fast Enable) bit in the TIM_CCMR2 register.
+ */
 #define TIM_CCMR2_OC4FE_Pos                 (10U)
-#define TIM_CCMR2_OC4FE_Msk                 (0x1UL << TIM_CCMR2_OC4FE_Pos)      /*!< 0x00000400 */
-#define TIM_CCMR2_OC4FE                     TIM_CCMR2_OC4FE_Msk                /*!<Output Compare 4 Fast enable */
-#define TIM_CCMR2_OC4PE_Pos                 (11U)
-#define TIM_CCMR2_OC4PE_Msk                 (0x1UL << TIM_CCMR2_OC4PE_Pos)      /*!< 0x00000800 */
-#define TIM_CCMR2_OC4PE                     TIM_CCMR2_OC4PE_Msk                /*!<Output Compare 4 Preload enable */
 
+/**
+ * @def TIM_CCMR2_OC4FE_Msk
+ * @brief Bit mask of the OC4FE (Output Compare 4 Fast Enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4FE_Msk                 (0x1UL << TIM_CCMR2_OC4FE_Pos)
+
+/**
+ * @def TIM_CCMR2_OC4FE
+ * @brief OC4FE (Output Compare 4 Fast Enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4FE                     TIM_CCMR2_OC4FE_Msk
+
+/**
+ * @def TIM_CCMR2_OC4PE_Pos
+ * @brief Position of the OC4PE (Output Compare 4 Preload Enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4PE_Pos                 (11U)
+
+/**
+ * @def TIM_CCMR2_OC4PE_Msk
+ * @brief Bit mask of the OC4PE (Output Compare 4 Preload Enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4PE_Msk                 (0x1UL << TIM_CCMR2_OC4PE_Pos)
+
+/**
+ * @def TIM_CCMR2_OC4PE
+ * @brief OC4PE (Output Compare 4 Preload Enable) bit in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4PE                     TIM_CCMR2_OC4PE_Msk
+
+/**
+ * @def TIM_CCMR2_OC4M_Pos
+ * @brief Position of the OC4M (Output Compare 4 Mode) bits in the TIM_CCMR2 register.
+ */
 #define TIM_CCMR2_OC4M_Pos                  (12U)
-#define TIM_CCMR2_OC4M_Msk                  (0x7UL << TIM_CCMR2_OC4M_Pos)       /*!< 0x00007000 */
-#define TIM_CCMR2_OC4M                      TIM_CCMR2_OC4M_Msk                 /*!<OC4M[2:0] bits (Output Compare 4 Mode) */
-#define TIM_CCMR2_OC4M_0                    (0x1UL << TIM_CCMR2_OC4M_Pos)       /*!< 0x00001000 */
-#define TIM_CCMR2_OC4M_1                    (0x2UL << TIM_CCMR2_OC4M_Pos)       /*!< 0x00002000 */
-#define TIM_CCMR2_OC4M_2                    (0x4UL << TIM_CCMR2_OC4M_Pos)       /*!< 0x00004000 */
+
+/**
+ * @def TIM_CCMR2_OC4M_Msk
+ * @brief Bit mask of the OC4M (Output Compare 4 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4M_Msk                  (0x7UL << TIM_CCMR2_OC4M_Pos)
+
+/**
+ * @def TIM_CCMR2_OC4M
+ * @brief OC4M (Output Compare 4 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4M                      TIM_CCMR2_OC4M_Msk
+
+/**
+ * @def TIM_CCMR2_OC4M_0
+ * @brief Bit 0 of OC4M (Output Compare 4 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4M_0                    (0x1UL << TIM_CCMR2_OC4M_Pos)
+
+/**
+ * @def TIM_CCMR2_OC4M_1
+ * @brief Bit 1 of OC4M (Output Compare 4 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4M_1                    (0x2UL << TIM_CCMR2_OC4M_Pos)
+
+/**
+ * @def TIM_CCMR2_OC4M_2
+ * @brief Bit 2 of OC4M (Output Compare 4 Mode) bits in the TIM_CCMR2 register.
+ */
+#define TIM_CCMR2_OC4M_2                    (0x4UL << TIM_CCMR2_OC4M_Pos)
 
 #define TIM_CCMR2_OC4CE_Pos                 (15U)
 #define TIM_CCMR2_OC4CE_Msk                 (0x1UL << TIM_CCMR2_OC4CE_Pos)      /*!< 0x00008000 */
