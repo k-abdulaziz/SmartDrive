@@ -1,4 +1,4 @@
-/*
+/**
  * @file MCAL_STK_Interface.h
  * @brief This file contains the interface of the MCAL_STK driver.
  *
