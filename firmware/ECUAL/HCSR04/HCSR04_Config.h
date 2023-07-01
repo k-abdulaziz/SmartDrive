@@ -1,5 +1,5 @@
 /**
- * @file HCSR04_Cfg.h
+ * @file HCSR04_Config.h
  * @brief Configuration file for the HC-SR04 ultrasonic sensor.
  *
  * @author Ahmed Abu Raya
