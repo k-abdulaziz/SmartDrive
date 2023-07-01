@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1500</width>
+    <height>1000</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/new/images/background.jpg)
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="AnalogueGauageWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>310</y>
+      <width>411</width>
+      <height>401</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="SpeedLCD">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>750</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(0, 0, 0);
+color: white;
+border-radius: 15px;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ACC_PB">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>360</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Archivo</family>
+      <pointsize>25</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:0.91, y2:0.58, stop:0.21393 rgba(52, 45, 141, 255), stop:0.99005 rgba(110, 255, 181, 255));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(143, 38, 119, 255), stop:1 rgba(255, 65, 141, 255));
+color: white;
+font: 25pt &quot;Archivo&quot;;
+
+</string>
+    </property>
+    <property name="text">
+     <string>ACC</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Mode_View">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>180</y>
+      <width>181</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(0, 0, 0);
+font: 18pt &quot;Archivo&quot;;
+border-radius: 15px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="DefaultSpeed_BP">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>460</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Archivo</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:0.91, y2:0.58, stop:0.21393 rgba(52, 45, 141, 255), stop:0.99005 rgba(110, 255, 181, 255));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(143, 38, 119, 255), stop:1 rgba(255, 65, 141, 255));
+color: white;
+font: 14pt &quot;Archivo&quot;;
+
+</string>
+    </property>
+    <property name="text">
+     <string>Default ON</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="SetSpeed_SB">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>520</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>141</width>
+      <height>71</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(143, 38, 119, 255), stop:1 rgba(255, 65, 141, 255));
+font: 30pt &quot;Archivo&quot;;</string>
+    </property>
+    <property name="minimum">
+     <number>60</number>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="LKS_PB">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>580</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Archivo</family>
+      <pointsize>25</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:0.91, y2:0.58, stop:0.21393 rgba(52, 45, 141, 255), stop:0.99005 rgba(110, 255, 181, 255));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(143, 38, 119, 255), stop:1 rgba(255, 65, 141, 255));
+color: white;
+font: 25pt &quot;Archivo&quot;;
+
+</string>
+    </property>
+    <property name="text">
+     <string>LKS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="LDW_PB">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>470</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Archivo</family>
+      <pointsize>25</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:0.91, y2:0.58, stop:0.21393 rgba(52, 45, 141, 255), stop:0.99005 rgba(110, 255, 181, 255));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(143, 38, 119, 255), stop:1 rgba(255, 65, 141, 255));
+color: white;
+font: 25pt &quot;Archivo&quot;;
+
+</string>
+    </property>
+    <property name="text">
+     <string>LDW</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="AEB_PB">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>360</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Archivo</family>
+      <pointsize>25</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:0.91, y2:0.58, stop:0.21393 rgba(52, 45, 141, 255), stop:0.99005 rgba(110, 255, 181, 255));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(143, 38, 119, 255), stop:1 rgba(255, 65, 141, 255));
+color: white;
+font: 25pt &quot;Archivo&quot;;
+
+</string>
+    </property>
+    <property name="text">
+     <string>AEB</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Speed_PB">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>620</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:0.91, y2:0.58, stop:0.21393 rgba(52, 45, 141, 255), stop:0.99005 rgba(110, 255, 181, 255));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(143, 38, 119, 255), stop:1 rgba(255, 65, 141, 255));
+color: white;
+font: 14pt &quot;Archivo&quot;;
+
+</string>
+    </property>
+    <property name="text">
+     <string>Set Speed</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AnalogueGauageWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">AnalogueGauageWidget.py</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../GUI/image.qrc"/>
+ </resources>
+ <connections/>
+</ui>
